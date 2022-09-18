@@ -7,3 +7,4 @@ Problem 3 - Find a Position in a Genome Minimizing the Skew
 
 Problem 4 - Find All Approximate Occurrences of a Pattern in a String
 
+Problem 5 - Find Frequent Words with Mismatches and Reverse Complements
