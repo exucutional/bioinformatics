@@ -36,7 +36,7 @@ def form_profile(motifs, r):
                 profile[offset[motifs[j][i]]][i] += 1
         
         for j in range(len(profile)):
-            profile[j][i] += p
+            profile[j][i] += 1
             profile[j][i] /= len(motifs) - 1 + p
 
     return profile
@@ -97,7 +97,7 @@ def random_solve(dna, k, t, N):
 def solve(dna, k, t, N):
     random.seed(time.time())
     best_motifs, best_score = random_solve(dna, k, t, N)
-    for _ in range(100):
+    for _ in range(20):
         motifs, score = random_solve(dna, k, t, N)
         if score < best_score:
             best_motifs = motifs[:]
@@ -124,7 +124,7 @@ def test():
 
     files_n = len(os.listdir(input_dir))
 
-    skip = [1,]
+    skip = []
     for i in range(1, files_n+1):
         if i in skip:
             print(f"-> Test {i} skipped")
