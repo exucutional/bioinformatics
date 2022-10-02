@@ -16,3 +16,5 @@ Problem 7 - Implement GreedyMotifSearch with Pseudocounts
 Problem 8 - Implement RandomizedMotifSearch
 
 Problem 9 - Implement GibbsSampler
+
+Problem 10 - Implement DistanceBetweenPatternAndStrings 
