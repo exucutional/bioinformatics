@@ -17,4 +17,6 @@ Problem 8 - Implement RandomizedMotifSearch
 
 Problem 9 - Implement GibbsSampler
 
-Problem 10 - Implement DistanceBetweenPatternAndStrings 
+Problem 10 - Implement DistanceBetweenPatternAndStrings
+
+Problem 11 - Find an Eulerian Path in a Graph
