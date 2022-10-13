@@ -20,3 +20,9 @@ Problem 9 - Implement GibbsSampler
 Problem 10 - Implement DistanceBetweenPatternAndStrings
 
 Problem 11 - Find an Eulerian Path in a Graph
+
+Problem 12 - Find a k-Universal Circular String
+
+Problem 13 - Reconstruct a String from its Paired Composition
+
+Problem 15 - Construct a String Spelled by a Gapped Genome Path
