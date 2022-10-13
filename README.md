@@ -25,4 +25,6 @@ Problem 12 - Find a k-Universal Circular String
 
 Problem 13 - Reconstruct a String from its Paired Composition
 
+Problem 14 - Generate Contigs from a Collection of Reads
+
 Problem 15 - Construct a String Spelled by a Gapped Genome Path
