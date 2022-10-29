@@ -34,3 +34,5 @@ Problem 16 - Find Substrings of a Genome Encoding a Given Amino Acid String
 Problem 17 - Compute the Number of Peptides of Given Total Mass 
 
 Problem 18 - Find a Cyclic Peptide with Theoretical Spectrum Matching an Ideal Spectrum
+
+Problem 19 - Implement LeaderboardCyclopeptideSequencing
