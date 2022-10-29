@@ -30,3 +30,5 @@ Problem 14 - Generate Contigs from a Collection of Reads
 Problem 15 - Construct a String Spelled by a Gapped Genome Path
 
 Problem 16 - Find Substrings of a Genome Encoding a Given Amino Acid String
+
+Problem 17 - Compute the Number of Peptides of Given Total Mass 
