@@ -40,3 +40,5 @@ Problem 19 - Implement LeaderboardCyclopeptideSequencing
 Problem 20 - Implement ConvolutionCyclopeptideSequencing
 
 Problem 21 - Length of a Longest Path in the Manhattan Tourist Problem
+
+Problem 22 - Longest Path in a DAG Problem
