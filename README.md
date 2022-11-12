@@ -38,3 +38,5 @@ Problem 18 - Find a Cyclic Peptide with Theoretical Spectrum Matching an Ideal S
 Problem 19 - Implement LeaderboardCyclopeptideSequencing
 
 Problem 20 - Implement ConvolutionCyclopeptideSequencing
+
+Problem 21 - Length of a Longest Path in the Manhattan Tourist Problem
