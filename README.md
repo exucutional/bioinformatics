@@ -50,3 +50,5 @@ Problem 24 - Find a Highest-Scoring Fitting Alignment of Two Strings
 Problem 25 - Find a Highest-Scoring Multiple Sequence Alignment
 
 Problem 26 - Implement GreedySorting to Sort a Permutation by Reversals 
+
+Problem 27 - Compute the 2-Break Distance Between a Pair of Genomes
