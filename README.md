@@ -48,3 +48,5 @@ Problem 23 - Find a Highest-Scoring Local Alignment of Two Strings
 Problem 24 - Find a Highest-Scoring Fitting Alignment of Two Strings
 
 Problem 25 - Find a Highest-Scoring Multiple Sequence Alignment
+
+Problem 26 - Implement GreedySorting to Sort a Permutation by Reversals 
