@@ -52,3 +52,9 @@ Problem 25 - Find a Highest-Scoring Multiple Sequence Alignment
 Problem 26 - Implement GreedySorting to Sort a Permutation by Reversals 
 
 Problem 27 - Compute the 2-Break Distance Between a Pair of Genomes
+
+Problem 28 - Find a Shortest Transformation of One Genome into Another by 2-Breaks
+
+Problem 29 - Implement GraphToGenome
+
+Problem 30 - Implement 2-BreakOnGenome 
