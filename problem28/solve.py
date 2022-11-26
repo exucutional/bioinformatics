@@ -9,6 +9,48 @@ import copy
 from argparse import ArgumentParser
 
 
+def get_breakpoint_graph(genome1, genome2):
+    bgraph = defaultdict(list)
+    for chromosome in genome1 + genome2:
+        for i in range(len(chromosome)):
+            next_i = (i+1)%len(chromosome)
+            bgraph[chromosome[i]].append(-1*chromosome[next_i])
+            bgraph[-1*chromosome[next_i]].append(chromosome[i])
+
+    return bgraph
+
+
+def get_cycles_n(bgraph):
+    cycles_n = 0
+    nodes = set(bgraph.keys())
+    while nodes:
+        cycle_nodes = set([nodes.pop()])
+        while cycle_nodes:
+            node = cycle_nodes.pop()
+            neighbours = set(neighbour for neighbour in bgraph[node] if neighbour in nodes)
+            cycle_nodes = cycle_nodes.union(neighbours)
+            nodes = nodes.difference(neighbours)
+        
+        cycles_n += 1
+
+    return cycles_n
+
+
+def get_blocks_n(genome):
+    blocks_n = 0
+    for chromosome in genome:
+        blocks_n += len(chromosome)
+    
+    return blocks_n
+
+
+def two_break_distance(genome1, genome2):
+    bgraph = get_breakpoint_graph(genome1, genome2)
+    cycles_n = get_cycles_n(bgraph)
+    blocks_n = get_blocks_n(genome1)
+    return blocks_n - cycles_n
+
+
 def chromosome_to_cycle(chromosome):
     nodes = [0]*len(chromosome)*2
     for i in range(len(chromosome)):
@@ -262,25 +304,52 @@ def two_break_on_genome(genome, i1, i2, j1, j2):
 def genome_to_string(genome):
     res = ""
     for chromosome in genome:
-        res += "(" + " ".join([("+" if i > 0 else "")+str(i) for i in chromosome]) + ") "
+        res += "(" + " ".join([("+" if i > 0 else "")+str(i) for i in chromosome]) + ")"
 
     return res
 
 
+def cycles_from_edges(blue, red):
+    adj_graph = np.zeros(shape=(len(blue)+len(red)+1,2),dtype=int)
+    visited = [0]*(len(blue)+len(red)+1)
+    for e in blue:
+        adj_graph[e[0],0] = e[1]
+        adj_graph[e[1],0] = e[0]
+    for e in red:
+        adj_graph[e[0],1] = e[1]
+        adj_graph[e[1],1] = e[0]
+    cycles = []
+    for i in range(1, len(blue)+len(red)+1):
+        if visited[i]==1:
+            continue
+        visited[i]==1
+        head = i
+        c = [head]
+        color = 0
+        while(True):
+            i = adj_graph[i, color]
+            if i == head:
+                cycles.append(c)
+                break
+            visited[i] = 1
+            c.append(i)
+            color = (color+1)%2
+    return cycles
+
+
 def shortest_transformation(P, Q):
-    blocks = sum([len(a) for a in P])
-    result = [P]
-    redEdges = coloured_edges(P)
-    blueEdges = coloured_edges(Q)
-    breakpointGraph = redEdges.union(blueEdges)
-    hasNontrivialCycle, removedRedEdges = edges_from_cycle(breakpointGraph, redEdges, blueEdges, blocks)
-    while hasNontrivialCycle:
-        redEdges = two_break_on_genome_graph(redEdges, removedRedEdges[0][0], removedRedEdges[0][1], removedRedEdges[1][0], removedRedEdges[1][1])
-        breakpointGraph = redEdges.union(blueEdges)
-        P = two_break_on_genome(P, removedRedEdges[0][0], removedRedEdges[0][1], removedRedEdges[1][0], removedRedEdges[1][1])
-        hasNontrivialCycle, removedRedEdges = edges_from_cycle(breakpointGraph, redEdges, blueEdges, blocks)
-        result.append(P)
-    return result
+    transforms = [P]
+    red_edges = coloured_edges(Q)
+    while(two_break_distance(P, Q) > 0):
+        blue_edges = coloured_edges(P)
+        cycles = cycles_from_edges(blue_edges, red_edges)
+        for c in cycles:
+            if len(c) >= 4:
+                P = two_break_on_genome(P, c[0], c[1], c[3], c[2])
+                transforms.append(P)
+                break
+
+    return transforms
 
 def solve(genome1, genom2):
     return shortest_transformation(genome1, genom2)
@@ -332,11 +401,11 @@ def test():
             continue
 
         start = time.time()
-        answer = genome_to_string(read_and_solve(os.path.join(input_dir, f"input_{i}.txt")))
+        answer = [genome_to_string(i) for i in read_and_solve(os.path.join(input_dir, f"input_{i}.txt"))]
         end = time.time()
         with open(os.path.join(output_dir, f"output_{i}.txt"), "r") as fout:
             lines = fout.readlines()
-            expected = lines[0].strip()
+            expected = [i.strip() for i in lines]
             passed = answer == expected
 
             if not passed:
@@ -346,11 +415,12 @@ def test():
 
 
 def solve_problem():
-    rosalind_input = "rosalind_ba6i.txt"
-    rosalind_output = "rosalind_ba6i_output.txt"
+    rosalind_input = "rosalind_ba6d.txt"
+    rosalind_output = "rosalind_ba6d_output.txt"
     answer = read_and_solve(rosalind_input)
     with open(rosalind_output, "w") as fout:
-        fout.write(genome_to_string(answer))
+        for answeri in answer:
+            fout.write(genome_to_string(answeri) + "\n")
 
     print("Done")
 
